@@ -1,8 +1,0 @@
-{% set static_greetings_hook = 'app_shop.greeting.static' %}
-{% set prefixes = [static_greetings_hook] %}
-
-{% extends '@SyliusShop/shared/layout/base.html.twig' %}
-
-{% block content %}
-    {% hook static_greetings_hook %}
-{% endblock %}

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    Acme\SyliusExamplePlugin\AcmeSyliusExamplePlugin::class => ['all' => true],
+    BitExpert\SyliusProductDocumentPlugin\BitExpertSyliusProductDocumentPlugin::class => ['all' => true],
 ];
