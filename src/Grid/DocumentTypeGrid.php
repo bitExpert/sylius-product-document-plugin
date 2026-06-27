@@ -27,19 +27,12 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'bitexpert_product_document_document_type')]
+#[AsGrid(
+    name: 'bitexpert_product_document_document_type',
+    resourceClass: DocumentType::class,
+)]
 final class DocumentTypeGrid extends AbstractGrid implements ResourceAwareGridInterface
 {
-    public static function getName(): string
-    {
-        return 'bitexpert_product_document_document_type';
-    }
-
-    public function getResourceClass(): string
-    {
-        return DocumentType::class;
-    }
-
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
@@ -75,5 +68,15 @@ final class DocumentTypeGrid extends AbstractGrid implements ResourceAwareGridIn
                 StringFilter::create('search', ['translation.name'])
                     ->setLabel('sylius.ui.search'),
             );
+    }
+
+    public static function getName(): string
+    {
+        return 'bitexpert_product_document_document_type';
+    }
+
+    public function getResourceClass(): string
+    {
+        return DocumentType::class;
     }
 }

@@ -4,7 +4,7 @@
 <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-documents" role="tabpanel" tabindex="0">
     <div class="card mb-3">
         <div class="card-header d-flex align-items-center justify-content-between">
-            <h2 class="card-title mb-0">{{ 'bitexpert.ui.documents'|trans }}</h2>
+            <h2 class="card-title mb-0">{{ 'bitexpert_product_document.ui.documents'|trans }}</h2>
             {{ form_widget(documents.vars.button_add) }}
         </div>
 
@@ -15,8 +15,8 @@
                 <table class="table table-vcenter card-table">
                     <thead>
                         <tr>
-                            <th>{{ 'bitexpert.form.product_document.document_type'|trans }}</th>
-                            <th>{{ 'bitexpert.form.product_document.file'|trans }}</th>
+                            <th>{{ 'bitexpert_product_document.form.product_document.document_type'|trans }}</th>
+                            <th>{{ 'bitexpert_product_document.form.product_document.file'|trans }}</th>
                             <th class="w-1"></th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                                             class="btn btn-md btn-outline-primary mt-4"
                                         >
                                             {{ ux_icon('tabler:download', {class: 'icon'}) }}
-                                            {{ 'bitexpert.ui.download_file'|trans }}
+                                            {{ 'bitexpert_product_document.ui.download_file'|trans }}
                                         </a>
                                     {% endif %}
                                 </td>
@@ -55,7 +55,7 @@
         {% else %}
             <div class="card-body text-center text-muted py-4">
                 {{ ux_icon('tabler:file-off', {class: 'icon icon-lg mb-2 d-block mx-auto'}) }}
-                <p class="mb-0">{{ 'bitexpert.ui.no_documents'|trans }}</p>
+                <p class="mb-0">{{ 'bitexpert_product_document.ui.no_documents'|trans }}</p>
             </div>
         {% endif %}
     </div>
