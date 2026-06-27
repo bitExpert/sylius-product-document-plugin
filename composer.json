@@ -17,7 +17,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "sylius/grid-bundle": "^1.15",
         "sylius/sylius": "^2.0"
     },
     "require-dev": {
@@ -48,7 +47,6 @@
         "symfony/browser-kit": "^6.4 || ^7.4",
         "symfony/debug-bundle": "^6.4 || ^7.4",
         "symfony/dotenv": "^6.4 || ^7.4",
-        "symfony/flex": "^2.4",
         "symfony/http-client": "^6.4 || ^7.4",
         "symfony/intl": "^6.4 || ^7.4",
         "symfony/maker-bundle": "^1.67",
@@ -57,6 +55,10 @@
         "symfony/webpack-encore-bundle": "^2.2",
         "symplify/easy-coding-standard": "^11.0 || ^12.0 || ^13.0",
         "vincentlanglet/twig-cs-fixer": "^4.0"
+    },
+    "conflict": {
+        "sylius/grid-bundle": "<1.15",
+        "symfony/flex": "<2.4"
     },
     "config": {
         "sort-packages": true,
