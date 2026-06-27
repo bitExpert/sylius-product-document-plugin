@@ -21,6 +21,6 @@ final class ProductFormMenuListener
         $event->getMenu()
             ->addChild('documents')
             ->setAttribute('template', '@BitExpertSyliusProductDocumentPlugin/Admin/Product/Tab/_document.html.twig')
-            ->setLabel('bitexpert.ui.documents');
+            ->setLabel('bitexpert_product_document.ui.documents');
     }
 }

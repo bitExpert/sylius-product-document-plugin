@@ -29,7 +29,7 @@ final class ProductTypeExtension extends AbstractTypeExtension
             'by_reference' => false,
             'label' => false,
             'button_add_options' => [
-                'label' => 'bitexpert.ui.add_document',
+                'label' => 'bitexpert_product_document.ui.add_document',
                 'attr' => ['class' => 'btn btn-outline-primary'],
             ],
             'button_delete_options' => [

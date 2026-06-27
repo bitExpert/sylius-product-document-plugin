@@ -2,13 +2,10 @@ bitexpert_product_document:
     ui:
         document_type: Document Type
         document_types: Document Types
-
-bitexpert:
-    ui:
         documents: Documents
         add_document: Add Document
         no_documents: No documents assigned yet.
-        download_documents: Download Documents
+        download_documents: Documents to download
         download_file: Download File
     form:
         product_document:

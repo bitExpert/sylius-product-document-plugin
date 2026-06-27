@@ -31,7 +31,7 @@ final class AdminMenuListener
             ->addChild('bitexpert_document_type', [
                 'route' => 'bitexpert_product_document_admin_document_type_index',
             ])
-            ->setLabel('bitexpert.menu.admin.catalog.document_types')
+            ->setLabel('bitexpert_product_document.menu.admin.catalog.document_types')
             ->setLabelAttribute('icon', 'file alternate outline');
     }
 }
