@@ -3,10 +3,10 @@
 ## Description: Bootstrap the test application
 
 composer install
-# Run default Sylius migrations
-vendor/bin/console doctrine:migration:migrate -n
-# Run the migrations for the Sylius Product Document plugin
-vendor/bin/console doctrine:migration:diff --namespace=BitExpertSyliusProductDocumentPlugin
+# Reset database to ensure a clean state
+vendor/bin/console doctrine:database:drop --force --if-exists
+vendor/bin/console doctrine:database:create
+# Run all migrations (Sylius + plugin)
 vendor/bin/console doctrine:migration:migrate -n
 # Install default fixtures
 vendor/bin/console sylius:fixtures:load -n
