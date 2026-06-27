@@ -24,7 +24,12 @@ final class DocumentTypeController extends ResourceController
 {
     public function updatePositionsAction(Request $request): Response
     {
+        /** @var array{_csrf_token?: string, documentTypes?: list<array{position: string|int, id: int}>}|null $data */
         $data = json_decode($request->getContent(), true);
+
+        if (!is_array($data)) {
+            return new JsonResponse();
+        }
 
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);

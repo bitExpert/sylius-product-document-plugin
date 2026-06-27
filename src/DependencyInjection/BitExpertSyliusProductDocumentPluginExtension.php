@@ -25,6 +25,7 @@ use BitExpert\SyliusProductDocumentPlugin\Model\DocumentTypeTranslationInterface
 use BitExpert\SyliusProductDocumentPlugin\Model\ProductDocumentInterface;
 use Sylius\Bundle\CoreBundle\DependencyInjection\PrependDoctrineMigrationsTrait;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -62,6 +63,7 @@ final class BitExpertSyliusProductDocumentPluginExtension extends AbstractResour
                         'model' => DocumentType::class,
                         'interface' => DocumentTypeInterface::class,
                         'controller' => DocumentTypeController::class,
+                        'factory' => TranslatableFactory::class,
                         'form' => DocumentTypeType::class,
                     ],
                     'translation' => [
@@ -94,6 +96,7 @@ final class BitExpertSyliusProductDocumentPluginExtension extends AbstractResour
         return '@BitExpertSyliusProductDocumentPlugin/src/Migrations';
     }
 
+    /** @return array<string> */
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [

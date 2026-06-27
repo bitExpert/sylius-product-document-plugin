@@ -30,5 +30,6 @@ interface DocumentTypeInterface extends ResourceInterface, TranslatableInterface
 
     public function setPosition(int $position): void;
 
+    /** @return Collection<int, mixed> */
     public function getProductDocuments(): Collection;
 }

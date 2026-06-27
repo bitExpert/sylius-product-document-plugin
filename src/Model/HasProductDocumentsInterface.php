@@ -12,17 +12,10 @@ declare(strict_types=1);
 
 namespace BitExpert\SyliusProductDocumentPlugin\Model;
 
-use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\Collection;
 
-interface DocumentInterface
+interface HasProductDocumentsInterface
 {
-    public function getFile(): ?File;
-
-    public function setFile(?File $file): void;
-
-    public function hasFile(): bool;
-
-    public function getPath(): ?string;
-
-    public function setPath(?string $path): void;
+    /** @return Collection<int, ProductDocumentInterface> */
+    public function getProductDocuments(): Collection;
 }
