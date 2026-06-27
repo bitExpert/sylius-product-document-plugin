@@ -42,7 +42,7 @@
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^10.5",
         "sylius-labs/coding-standard": "^4.4",
-        "sylius-labs/suite-tags-extension": "^0.2",
+        "sylius-labs/suite-tags-extension": "^0.3",
         "sylius/sylius-rector": "^3.7",
         "sylius/test-application": "^2.0.0@alpha",
         "symfony/browser-kit": "^6.4 || ^7.4",
