@@ -24,11 +24,11 @@
                         {% for document_form in documents %}
                             <tr>
                                 <td class="align-top" style="min-width: 200px;">
-                                    {{ form_widget(document_form.documentType, { label: false }) }}
+                                    {{ form_widget(document_form.documentType, {label: false}) }}
                                     {{ form_errors(document_form.documentType) }}
                                 </td>
                                 <td class="align-top">
-                                    {{ form_widget(document_form.file, { label: false }) }}
+                                    {{ form_widget(document_form.file, {label: false}) }}
                                     {{ form_errors(document_form.file) }}
                                     {% if document_form.vars.value and document_form.vars.value.path is not null %}
                                         <a href="{{ path('bitexpert_product_document_shop_product_document_download', {id: document_form.vars.value.id}) }}"
@@ -44,7 +44,7 @@
                                     {{ form_widget(document_form.vars.button_delete, {
                                         label: ux_icon('tabler:trash', {class: 'icon'}),
                                         label_html: true,
-                                        attr: { class: 'btn btn-outline-danger d-inline-flex align-items-center justify-content-center' }
+                                        attr: {class: 'btn btn-outline-danger d-inline-flex align-items-center justify-content-center'},
                                     }) }}
                                 </td>
                             </tr>

@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace BitExpert\SyliusProductDocumentPlugin\EventListener;
 
-use BitExpert\SyliusProductDocumentPlugin\Model\ProductDocumentInterface;
+use BitExpert\SyliusProductDocumentPlugin\Model\HasProductDocumentsInterface;
 use BitExpert\SyliusProductDocumentPlugin\Uploader\UploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -26,16 +26,11 @@ final class ProductDocumentsUploadListener
     public function uploadDocuments(GenericEvent $event): void
     {
         $subject = $event->getSubject();
-        Assert::true(
-            method_exists($subject, 'getProductDocuments'),
-            'Subject must use HasProductDocumentsTrait.',
-        );
+        Assert::isInstanceOf($subject, HasProductDocumentsInterface::class);
 
         $documents = $subject->getProductDocuments();
 
         foreach ($documents as $document) {
-            Assert::isInstanceOf($document, ProductDocumentInterface::class);
-
             if ($document->hasFile()) {
                 $this->uploader->upload($document);
             }

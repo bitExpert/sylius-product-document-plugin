@@ -18,8 +18,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+/** @phpstan-ignore trait.unused */
 trait HasProductDocumentsTrait
 {
+    /** @var Collection<int, ProductDocumentInterface> */
     #[ORM\OneToMany(targetEntity: ProductDocument::class, mappedBy: 'product', cascade: ['all'], orphanRemoval: true)]
     protected Collection $productDocuments;
 
@@ -28,11 +30,13 @@ trait HasProductDocumentsTrait
         $this->productDocuments = new ArrayCollection();
     }
 
+    /** @return Collection<int, ProductDocumentInterface> */
     public function getProductDocuments(): Collection
     {
         return $this->productDocuments;
     }
 
+    /** @return Collection<int, ProductDocumentInterface> */
     public function getDocumentsByType(string $typeCode): Collection
     {
         return $this->productDocuments->filter(

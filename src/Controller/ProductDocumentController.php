@@ -16,6 +16,7 @@ use BitExpert\SyliusProductDocumentPlugin\Uploader\UploaderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class ProductDocumentController extends ResourceController
 {
@@ -27,6 +28,10 @@ final class ProductDocumentController extends ResourceController
         $document = $this->findOr404($configuration);
 
         $path = $document->getPath();
+        if ($path === null) {
+            throw new HttpException(Response::HTTP_NOT_FOUND, 'Document has no path.');
+        }
+
         $extension = strtolower(pathinfo($path, \PATHINFO_EXTENSION));
         $basename = pathinfo($path, \PATHINFO_BASENAME);
 

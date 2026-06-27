@@ -31,7 +31,7 @@ class DocumentType implements DocumentTypeInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; // @phpstan-ignore property.unusedType
 
     #[ORM\Column(length: 255, unique: true)]
     private ?string $code = null;
@@ -39,6 +39,7 @@ class DocumentType implements DocumentTypeInterface
     #[ORM\Column]
     private int $position = 0;
 
+    /** @var Collection<int, ProductDocument> */
     #[ORM\OneToMany(targetEntity: ProductDocument::class, mappedBy: 'documentType', cascade: ['all'], orphanRemoval: true)]
     private Collection $productDocuments;
 
@@ -73,6 +74,7 @@ class DocumentType implements DocumentTypeInterface
         $this->position = $position;
     }
 
+    /** @return Collection<int, ProductDocument> */
     public function getProductDocuments(): Collection
     {
         return $this->productDocuments;

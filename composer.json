@@ -17,6 +17,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "sylius/grid-bundle": "^1.15",
         "sylius/sylius": "^2.0"
     },
     "require-dev": {
@@ -25,6 +26,7 @@
         "dbrekelmans/bdi": "^1.4",
         "dmore/behat-chrome-extension": "^1.4",
         "dmore/chrome-mink-driver": "^2.9",
+        "ergebnis/composer-normalize": "^2.52",
         "friends-of-behat/mink": "^1.11",
         "friends-of-behat/mink-browserkit-driver": "^1.6",
         "friends-of-behat/mink-debug-extension": "^2.1",
@@ -33,29 +35,34 @@
         "friends-of-behat/suite-settings-extension": "^1.1",
         "friends-of-behat/symfony-extension": "^2.6",
         "friends-of-behat/variadic-extension": "^1.6",
+        "madewithlove/license-checker": "^3.1",
         "nyholm/psr7": "^1.8",
         "phpstan/phpstan-doctrine": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^10.5",
         "sylius-labs/coding-standard": "^4.4",
-        "sylius-labs/suite-tags-extension": "~0.2",
+        "sylius-labs/suite-tags-extension": "^0.2",
         "sylius/sylius-rector": "^3.7",
         "sylius/test-application": "^2.0.0@alpha",
         "symfony/browser-kit": "^6.4 || ^7.4",
         "symfony/debug-bundle": "^6.4 || ^7.4",
         "symfony/dotenv": "^6.4 || ^7.4",
+        "symfony/flex": "^2.4",
         "symfony/http-client": "^6.4 || ^7.4",
         "symfony/intl": "^6.4 || ^7.4",
         "symfony/maker-bundle": "^1.67",
         "symfony/runtime": "^6.4 || ^7.4",
         "symfony/web-profiler-bundle": "^6.4 || ^7.4",
-        "symfony/webpack-encore-bundle": "^2.2"
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symplify/easy-coding-standard": "^11.0 || ^12.0 || ^13.0",
+        "vincentlanglet/twig-cs-fixer": "^4.0"
     },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true,
             "php-http/discovery": false,
             "phpstan/extension-installer": true,
             "rector/extension-installer": true,
@@ -83,14 +90,13 @@
         }
     },
     "scripts": {
-        "post-root-package-install": [
-            "@php bin/validate-directory.php"
-        ],
-        "post-create-project-cmd": [
-            "@php bin/rename-plugin.php",
-            "@test-app-init",
-            "@php bin/show-success.php"
-        ],
+        "analyze": "vendor/bin/phpstan analyze",
+        "check-license": "vendor/bin/license-checker check",
+        "coverage": "vendor/bin/phpunit --coverage-clover clover.xml",
+        "cs-check": "vendor/bin/ecs check",
+        "cs-fix": "vendor/bin/ecs check --fix",
+        "cs-twig": "vendor/bin/twig-cs-fixer lint templates",
+        "cs-twig-fix": "vendor/bin/twig-cs-fixer fix templates",
         "database-reset": [
             "vendor/bin/console doctrine:database:drop --force --if-exists",
             "vendor/bin/console doctrine:database:create",
@@ -101,6 +107,7 @@
             "cd vendor/sylius/test-application && yarn install && yarn build",
             "vendor/bin/console assets:install"
         ],
+        "test": "vendor/bin/phpunit",
         "test-app-init": [
             "@database-reset",
             "@frontend-clear"

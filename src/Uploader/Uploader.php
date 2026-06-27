@@ -23,7 +23,8 @@ final class Uploader implements UploaderInterface
 
     public function upload(DocumentInterface $document): void
     {
-        if (!$document->hasFile()) {
+        $file = $document->getFile();
+        if ($file === null) {
             return;
         }
 
@@ -33,15 +34,17 @@ final class Uploader implements UploaderInterface
 
         do {
             $hash = md5(uniqid((string) mt_rand(), true));
-            $path = $this->buildPath($hash . '.' . $document->getFile()->guessExtension());
+            $path = $this->buildPath($hash . '.' . $file->guessExtension());
         } while ($this->filesystem->fileExists($path));
 
         $document->setPath($path);
 
-        $this->filesystem->write(
-            $path,
-            file_get_contents($document->getFile()->getPathname()),
-        );
+        $content = file_get_contents($file->getPathname());
+        if ($content === false) {
+            throw new \RuntimeException(sprintf('Failed to read file "%s".', $file->getPathname()));
+        }
+
+        $this->filesystem->write($path, $content);
     }
 
     public function remove(string $path): bool
@@ -57,7 +60,9 @@ final class Uploader implements UploaderInterface
 
     public function getContent(DocumentInterface $document): string
     {
-        return $this->filesystem->read($document->getPath());
+        $path = $document->getPath() ?? throw new \RuntimeException('Document has no path.');
+
+        return $this->filesystem->read($path);
     }
 
     private function buildPath(string $filename): string

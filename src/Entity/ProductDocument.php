@@ -15,8 +15,8 @@ namespace BitExpert\SyliusProductDocumentPlugin\Entity;
 use BitExpert\SyliusProductDocumentPlugin\Model\DocumentTypeInterface;
 use BitExpert\SyliusProductDocumentPlugin\Model\ProductDocumentInterface;
 use Doctrine\ORM\Mapping as ORM;
-use SplFileInfo;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bitexpert_sylius_product_document')]
@@ -26,9 +26,9 @@ class ProductDocument implements ProductDocumentInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; // @phpstan-ignore property.unusedType
 
-    private ?SplFileInfo $file = null;
+    private ?File $file = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $path = null;
@@ -57,12 +57,12 @@ class ProductDocument implements ProductDocumentInterface
         return $this->id;
     }
 
-    public function getFile(): ?SplFileInfo
+    public function getFile(): ?File
     {
         return $this->file;
     }
 
-    public function setFile(?SplFileInfo $file): void
+    public function setFile(?File $file): void
     {
         $this->file = $file;
     }

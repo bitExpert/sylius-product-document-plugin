@@ -1,6 +1,6 @@
 {% set product = hookable_metadata.context.product %}
 
-{% embed '@SyliusShop/shared/accordion/accordion_item_content.html.twig' with { accordion_item_id: 'documents' } %}
+{% embed '@SyliusShop/shared/accordion/accordion_item_content.html.twig' with {accordion_item_id: 'documents'} %}
     {% block accordion_item_content %}
         <div class="list-group list-group-flush">
             {% for document in product.productDocuments %}
