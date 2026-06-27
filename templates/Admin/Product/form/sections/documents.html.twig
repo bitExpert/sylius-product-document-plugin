@@ -24,16 +24,16 @@
                         {% for document_form in documents %}
                             <tr>
                                 <td class="align-top" style="min-width: 200px;">
-                                    {{ form_widget(document_form.documentType, {label: false}) }}
+                                    {{ form_widget(document_form.documentType) }}
                                     {{ form_errors(document_form.documentType) }}
                                 </td>
                                 <td class="align-top">
-                                    {{ form_widget(document_form.file, {label: false}) }}
+                                    {{ form_widget(document_form.file) }}
                                     {{ form_errors(document_form.file) }}
                                     {% if document_form.vars.value and document_form.vars.value.path is not null %}
                                         <a href="{{ path('bitexpert_product_document_shop_product_document_download', {id: document_form.vars.value.id}) }}"
                                             target="_blank"
-                                            class="btn btn-sm btn-outline-secondary mt-2 d-inline-flex align-items-center gap-1"
+                                            class="btn btn-md btn-outline-primary mt-4"
                                         >
                                             {{ ux_icon('tabler:download', {class: 'icon'}) }}
                                             {{ 'bitexpert.ui.download_file'|trans }}
@@ -44,7 +44,7 @@
                                     {{ form_widget(document_form.vars.button_delete, {
                                         label: ux_icon('tabler:trash', {class: 'icon'}),
                                         label_html: true,
-                                        attr: {class: 'btn btn-outline-danger d-inline-flex align-items-center justify-content-center'},
+                                        attr: {class: 'btn btn-outline-danger btn-icon'},
                                     }) }}
                                 </td>
                             </tr>
