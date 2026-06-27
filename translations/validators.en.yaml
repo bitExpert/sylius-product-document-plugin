@@ -1,0 +1,6 @@
+bitexpert_product_document:
+  admin:
+    form:
+      document_type:
+        code_required: Please enter a code
+        name_required: Please enter a name

@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Resource\Model\TranslatableTrait;
 use Sylius\Resource\Model\TranslationInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bitexpert_sylius_document_type')]
@@ -34,6 +35,7 @@ class DocumentType implements DocumentTypeInterface
     private ?int $id = null; // @phpstan-ignore property.unusedType
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'bitexpert_product_document.admin.form.document_type.code_required')]
     private ?string $code = null;
 
     #[ORM\Column]

@@ -15,6 +15,7 @@ namespace BitExpert\SyliusProductDocumentPlugin\Entity;
 use BitExpert\SyliusProductDocumentPlugin\Model\DocumentTypeTranslationInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Resource\Model\AbstractTranslation;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'bitexpert_sylius_document_type_translation')]
@@ -26,6 +27,7 @@ class DocumentTypeTranslation extends AbstractTranslation implements DocumentTyp
     private ?int $id = null; // @phpstan-ignore property.unusedType
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotNull(message: 'bitexpert_product_document.admin.form.document_type.name_required')]
     private ?string $name = null;
 
     public function getId(): ?int
