@@ -37,7 +37,7 @@ The **Product Document** Plugin for *Sylius* allows you to attach documents (e.g
 composer require bitexpert/sylius-product-document-plugin
 ```
 
-1. Enable the plugin
+2. Enable the plugin
 
 ```php
 <?php
@@ -49,7 +49,7 @@ return [
 ];
 ```
 
-1. Import config
+3. Import config
 
 ```yaml
 # config/packages/_sylius.yaml
@@ -59,7 +59,7 @@ imports:
     - { resource: "@BitExpertSyliusProductDocumentPlugin/config/config.yaml" }
 ```
 
-2. Import routing
+4. Import routing
 
 ```yaml
 # config/routes/bitexpert_product_document.yaml
@@ -67,7 +67,7 @@ bitexpert_product_document_admin:
     resource: "@BitExpertSyliusProductDocumentPlugin/config/routes/admin.yaml"
 ```
 
-3. Configure the `Product` entity in `src/Entity/Product/Product.php`
+5. Configure the `Product` entity in `src/Entity/Product/Product.php`
 
 Add the `BitExpert\SyliusProductDocumentPlugin\Model\HasProductDocumentsInterface` interface and the `BitExpert\SyliusProductDocumentPlugin\Entity\Trait\HasProductDocumentsTrait` trait to the entity.
 
@@ -97,7 +97,7 @@ class Product extends BaseProduct implements HasProductDocumentsInterface
 }
 ```
 
-4. Update your database schema
+6. Update your database schema
 
 ```bash
 php bin/console doctrine:migrations:diff
