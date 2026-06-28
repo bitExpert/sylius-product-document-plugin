@@ -11,7 +11,12 @@ bitexpert_product_document:
         product_document:
             document_type: Dokumenttyp
             file: Datei
+            document_visibility: Dokument Sichtbarkeit
     menu:
         admin:
             catalog:
                 document_types: Dokumenttypen
+    document_visibility:
+        enum:
+            public: Dokument für alle sichtbar
+            logged_in: Dokument nur für eingeloggte Benutzer

@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                             <th>{{ 'bitexpert_product_document.form.product_document.document_type'|trans }}</th>
+                            <th>{{ 'bitexpert_product_document.form.product_document.document_visibility'|trans }}</th>
                             <th>{{ 'bitexpert_product_document.form.product_document.file'|trans }}</th>
                             <th class="w-1"></th>
                         </tr>
@@ -23,15 +24,19 @@
                     <tbody>
                         {% for document_form in documents %}
                             <tr>
-                                <td class="align-top" style="min-width: 200px;">
+                                <td class="align-top">
                                     {{ form_widget(document_form.documentType) }}
                                     {{ form_errors(document_form.documentType) }}
+                                </td>
+                                <td class="align-top">
+                                    {{ form_widget(document_form.documentVisibility) }}
+                                    {{ form_errors(document_form.documentVisibility) }}
                                 </td>
                                 <td class="align-top">
                                     {{ form_widget(document_form.file) }}
                                     {{ form_errors(document_form.file) }}
                                     {% if document_form.vars.value and document_form.vars.value.path is not null %}
-                                        <a href="{{ path('bitexpert_product_document_shop_product_document_download', {id: document_form.vars.value.id}) }}"
+                                        <a href="{{ path('bitexpert_product_document_admin_product_document_download', {id: document_form.vars.value.id}) }}"
                                             target="_blank"
                                             class="btn btn-md btn-outline-primary mt-4"
                                         >

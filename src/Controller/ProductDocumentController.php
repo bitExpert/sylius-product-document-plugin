@@ -12,41 +12,72 @@ declare(strict_types=1);
 
 namespace BitExpert\SyliusProductDocumentPlugin\Controller;
 
+use BitExpert\SyliusProductDocumentPlugin\Entity\DocumentVisibility;
+use BitExpert\SyliusProductDocumentPlugin\Entity\ProductDocument;
 use BitExpert\SyliusProductDocumentPlugin\Uploader\UploaderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class ProductDocumentController extends ResourceController
+final readonly class ProductDocumentController
 {
-    public function downloadAction(Request $request, UploaderInterface $uploader): Response
+    public function __construct(
+        #[Autowire(service: 'bitexpert_product_document.repository.product_document')]
+        private RepositoryInterface $productDocumentRepository,
+        #[Autowire(service: 'bitexpert_product_document.uploader')]
+        private UploaderInterface $uploader,
+        private Security $security,
+    ) {
+    }
+
+    public function downloadAction(Request $request, int $id): Response
     {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        /** @var ProductDocument|null $document */
+        $document = $this->productDocumentRepository->find($id);
 
-        /** @var \BitExpert\SyliusProductDocumentPlugin\Model\ProductDocumentInterface $document */
-        $document = $this->findOr404($configuration);
-
-        $path = $document->getPath();
-        if ($path === null) {
-            throw new HttpException(Response::HTTP_NOT_FOUND, 'Document has no path.');
+        if (null === $document) {
+            throw new NotFoundHttpException('Document not found.');
         }
 
-        $extension = strtolower(pathinfo($path, \PATHINFO_EXTENSION));
-        $basename = pathinfo($path, \PATHINFO_BASENAME);
+        if (DocumentVisibility::LOGGED_IN === $document->getDocumentVisibility() &&
+            null === $this->security->getUser()
+        ) {
+            throw new NotFoundHttpException('Document not found.');
+        }
 
-        $contentType = match ($extension) {
-            'pdf' => 'application/pdf',
-            default => 'image/' . $extension,
-        };
+        return $this->buildResponse($request, $document);
+    }
 
-        $disposition = $request->query->has('download')
-            ? 'attachment; filename="' . $basename . '"'
-            : 'inline; filename="' . $basename . '"';
+    public function adminDownloadAction(Request $request, int $id): Response
+    {
+        /** @var ProductDocument|null $document */
+        $document = $this->productDocumentRepository->find($id);
 
-        return new Response($uploader->getContent($document), Response::HTTP_OK, [
-            'Content-Type' => $contentType,
-            'Content-Disposition' => $disposition,
-        ]);
+        if (null === $document) {
+            throw new NotFoundHttpException('Document not found.');
+        }
+
+        return $this->buildResponse($request, $document);
+    }
+
+    private function buildResponse(Request $request, ProductDocument $document): Response
+    {
+        $path = $document->getPath() ?? throw new NotFoundHttpException('Document has no path.');
+        $info = pathinfo($path);
+        $extension = strtolower($info['extension'] ?? '');
+        $basename = $info['basename'] ?: 'document';
+        $disposition = $request->query->has('download') ? 'attachment; ' : '';
+
+        return new Response(
+            $this->uploader->getContent($document),
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'pdf' === $extension ? 'application/pdf' : "image/{$extension}",
+                'Content-Disposition' => "{$disposition}filename=\"{$basename}\"",
+            ],
+        );
     }
 }

@@ -34,18 +34,21 @@ class ProductDocument implements ProductDocumentInterface
     private ?string $path = null;
 
     #[ORM\ManyToOne(targetEntity: DocumentType::class, inversedBy: 'productDocuments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'document_type_id', nullable: false)]
     private ?DocumentType $documentType = null;
 
     #[ORM\ManyToOne(targetEntity: 'Sylius\Component\Core\Model\ProductInterface')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?ProductInterface $product = null;
 
-    #[ORM\Column]
+    #[ORM\Column('created_at')]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(name: 'updated_at', nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(name: 'document_visibility', enumType: DocumentVisibility::class)]
+    private DocumentVisibility $documentVisibility = DocumentVisibility::PUBLIC;
 
     public function __construct()
     {
@@ -110,6 +113,18 @@ class ProductDocument implements ProductDocumentInterface
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    public function getDocumentVisibility(): DocumentVisibility
+    {
+        return $this->documentVisibility;
+    }
+
+    public function setDocumentVisibility(?DocumentVisibility $documentVisibility): static
+    {
+        $this->documentVisibility = $documentVisibility ?? DocumentVisibility::PUBLIC;
+
+        return $this;
     }
 
     #[ORM\PreUpdate]

@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace BitExpert\SyliusProductDocumentPlugin\DependencyInjection;
 
 use BitExpert\SyliusProductDocumentPlugin\Controller\DocumentTypeController;
-use BitExpert\SyliusProductDocumentPlugin\Controller\ProductDocumentController;
 use BitExpert\SyliusProductDocumentPlugin\Entity\DocumentType;
 use BitExpert\SyliusProductDocumentPlugin\Entity\DocumentTypeTranslation;
 use BitExpert\SyliusProductDocumentPlugin\Entity\ProductDocument;
@@ -78,7 +77,6 @@ final class BitExpertSyliusProductDocumentPluginExtension extends AbstractResour
                     'classes' => [
                         'model' => ProductDocument::class,
                         'interface' => ProductDocumentInterface::class,
-                        'controller' => ProductDocumentController::class,
                         'form' => ProductDocumentType::class,
                     ],
                 ],

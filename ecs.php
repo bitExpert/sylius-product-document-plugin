@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
+use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return static function (ECSConfig $ecsConfig): void {
@@ -13,6 +14,9 @@ return static function (ECSConfig $ecsConfig): void {
     ]);
 
     $ecsConfig->import('vendor/sylius-labs/coding-standard/ecs.php');
+
+    // Remove 'case' token to prevent conflict with ClassAttributesSeparationFixer on enum cases
+    $ecsConfig->ruleWithConfiguration(NoExtraBlankLinesFixer::class, ['tokens' => ['break', 'continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'switch', 'throw', 'use']]);
 
     $ecsConfig->skip([
         VisibilityRequiredFixer::class => ['*Spec.php'],

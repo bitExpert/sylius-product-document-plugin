@@ -4,13 +4,16 @@
     {% block accordion_item_content %}
         <div class="list-group list-group-flush">
             {% for document in product.productDocuments %}
-                <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between pe-0"
-                   href="{{ path('bitexpert_product_document_shop_product_document_download', {id: document.id}) }}"
-                   target="_blank"
-                >
-                    <span>{{ document.documentType.name }}</span>
-                    {{ ux_icon('tabler:file-download', {width: '25', height: '25', class: 'text-muted flex-shrink-0'}) }}
-                </a>
+                {% set documentVisibility = document.documentVisibility.value %}
+                {% if documentVisibility == 'public' or (documentVisibility == 'logged_in' and app.user is not null) %}
+                    <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between pe-0"
+                    href="{{ path('bitexpert_product_document_shop_product_document_download', {id: document.id}) }}"
+                    target="_blank"
+                    >
+                        <span>{{ document.documentType.name }}</span>
+                        {{ ux_icon('tabler:file-download', {width: '25', height: '25', class: 'text-muted flex-shrink-0'}) }}
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
     {% endblock %}

@@ -23,6 +23,7 @@ The **Product Document** Plugin for *Sylius* allows you to attach documents (e.g
 * Manage document types with translatable names and sortable positions
 * Attach multiple documents to a product, organized by document type
 * Download documents in the storefront and in the admin
+* Control document visibility: public for all visitors or restricted to logged-in customers
 
 ## Requirements
 

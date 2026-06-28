@@ -13,8 +13,10 @@ declare(strict_types=1);
 namespace BitExpert\SyliusProductDocumentPlugin\Form\Type;
 
 use BitExpert\SyliusProductDocumentPlugin\Entity\DocumentType;
+use BitExpert\SyliusProductDocumentPlugin\Entity\DocumentVisibility;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -31,6 +33,12 @@ final class ProductDocumentType extends AbstractResourceType
             ->add('file', FileType::class, [
                 'label' => false,
                 'required' => false,
+            ])
+            ->add('documentVisibility', EnumType::class, [
+                'class' => DocumentVisibility::class,
+                'choices' => DocumentVisibility::getChoices(),
+                'label' => false,
+                'required' => true,
             ]);
     }
 
