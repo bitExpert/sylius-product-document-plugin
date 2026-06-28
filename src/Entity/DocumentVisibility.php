@@ -19,7 +19,6 @@ enum DocumentVisibility: string implements TranslatableInterface
 {
     case PUBLIC = 'public';
     case LOGGED_IN = 'logged_in';
-
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return match ($this) {
