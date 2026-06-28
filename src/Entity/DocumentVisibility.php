@@ -27,6 +27,9 @@ enum DocumentVisibility: string implements TranslatableInterface
         };
     }
 
+    /**
+     * @return array<int, DocumentVisibility>
+     */
     public static function getChoices(): array
     {
         return [
