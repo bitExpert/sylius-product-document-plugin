@@ -9,6 +9,12 @@ bitexpert_product_document_admin_document_type:
     type: sylius.resource
     prefix: /admin
 
+bitexpert_product_document_admin_product_document_download:
+    path: /admin/product-documents/{id}/download
+    methods: [GET]
+    defaults:
+        _controller: BitExpert\SyliusProductDocumentPlugin\Controller\ProductDocumentController::adminDownloadAction
+
 bitexpert_product_document_admin_document_type_update_positions:
     path: /admin/document-types/update-positions
     methods: [PUT]

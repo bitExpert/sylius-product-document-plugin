@@ -36,7 +36,7 @@
                                     {{ form_widget(document_form.file) }}
                                     {{ form_errors(document_form.file) }}
                                     {% if document_form.vars.value and document_form.vars.value.path is not null %}
-                                        <a href="{{ path('bitexpert_product_document_shop_product_document_download', {id: document_form.vars.value.id}) }}"
+                                        <a href="{{ path('bitexpert_product_document_admin_product_document_download', {id: document_form.vars.value.id}) }}"
                                             target="_blank"
                                             class="btn btn-md btn-outline-primary mt-4"
                                         >

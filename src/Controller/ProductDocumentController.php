@@ -48,6 +48,23 @@ final readonly class ProductDocumentController
             throw new NotFoundHttpException('Document not found.');
         }
 
+        return $this->buildResponse($request, $document);
+    }
+
+    public function adminDownloadAction(Request $request, int $id): Response
+    {
+        /** @var ProductDocument|null $document */
+        $document = $this->productDocumentRepository->find($id);
+
+        if (null === $document) {
+            throw new NotFoundHttpException('Document not found.');
+        }
+
+        return $this->buildResponse($request, $document);
+    }
+
+    private function buildResponse(Request $request, ProductDocument $document): Response
+    {
         $path = $document->getPath() ?? throw new NotFoundHttpException('Document has no path.');
         $info = pathinfo($path);
         $extension = strtolower($info['extension'] ?? '');
