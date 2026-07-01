@@ -66,6 +66,9 @@ imports:
 # config/routes/bitexpert_product_document.yaml
 bitexpert_product_document_admin:
     resource: "@BitExpertSyliusProductDocumentPlugin/config/routes/admin.yaml"
+
+bitexpert_product_document_shop:
+    resource: "@BitExpertSyliusProductDocumentPlugin/config/routes/shop.yaml"
 ```
 
 5. Configure the `Product` entity in `src/Entity/Product/Product.php`
