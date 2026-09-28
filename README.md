@@ -79,21 +79,30 @@ declare(strict_types=1);
 
 namespace App\Entity\Product;
 
-use BitExpert\SyliusProductDocumentPlugin\Entity\Trait\HasProductDocumentsTrait;
-use BitExpert\SyliusProductDocumentPlugin\Model\HasProductDocumentsInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\ProductTranslationInterface;
+use Sylius\MolliePlugin\Entity\ProductInterface;
+use Sylius\MolliePlugin\Entity\ProductTrait;
+use BitExpert\SyliusProductDocumentPlugin\Entity\Trait\HasProductDocumentsTrait;
+use BitExpert\SyliusProductDocumentPlugin\Model\HasProductDocumentsInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'sylius_product')]
-class Product extends BaseProduct implements HasProductDocumentsInterface
+class Product extends BaseProduct implements ProductInterface, HasProductDocumentsInterface
 {
+    use ProductTrait;
     use HasProductDocumentsTrait;
 
     public function __construct()
     {
         parent::__construct();
         $this->initializeProductDocumentsCollection();
+    }
+
+    protected function createTranslation(): ProductTranslationInterface
+    {
+        return new ProductTranslation();
     }
 }
 ```
