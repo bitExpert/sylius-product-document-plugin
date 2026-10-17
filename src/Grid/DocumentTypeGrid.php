@@ -22,18 +22,16 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
-use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
-use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
+use Sylius\Component\Grid\Builder\GridBuilderInterface;
 
 #[AsGrid(
-    name: 'bitexpert_product_document_document_type',
     resourceClass: DocumentType::class,
+    name: 'bitexpert_product_document_document_type',
 )]
-final class DocumentTypeGrid extends AbstractGrid implements ResourceAwareGridInterface
+final class DocumentTypeGrid
 {
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->orderBy('position', 'asc')
@@ -68,15 +66,5 @@ final class DocumentTypeGrid extends AbstractGrid implements ResourceAwareGridIn
                 StringFilter::create('search', ['translation.name'])
                     ->setLabel('sylius.ui.search'),
             );
-    }
-
-    public static function getName(): string
-    {
-        return 'bitexpert_product_document_document_type';
-    }
-
-    public function getResourceClass(): string
-    {
-        return DocumentType::class;
     }
 }
