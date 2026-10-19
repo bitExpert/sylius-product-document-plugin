@@ -17,6 +17,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "sylius/grid-bundle": "^1.16",
         "sylius/sylius": "^2.0"
     },
     "require-dev": {
@@ -58,7 +59,6 @@
         "vincentlanglet/twig-cs-fixer": "^4.0"
     },
     "conflict": {
-        "sylius/grid-bundle": "<1.15",
         "symfony/flex": "<2.4"
     },
     "config": {
