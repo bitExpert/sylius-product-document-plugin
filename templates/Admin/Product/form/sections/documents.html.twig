@@ -3,65 +3,69 @@
 
 <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-documents" role="tabpanel" tabindex="0">
     <div class="card mb-3">
-        <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="card-header">
             <h2 class="card-title mb-0">{{ 'bitexpert_product_document.ui.documents'|trans }}</h2>
-            {{ form_widget(documents.vars.button_add) }}
         </div>
 
-        {{ form_errors(documents) }}
-
-        {% if documents|length > 0 %}
-            <div class="table-responsive">
-                <table class="table table-vcenter card-table">
-                    <thead>
-                        <tr>
-                            <th>{{ 'bitexpert_product_document.form.product_document.document_type'|trans }}</th>
-                            <th>{{ 'bitexpert_product_document.form.product_document.document_visibility'|trans }}</th>
-                            <th>{{ 'bitexpert_product_document.form.product_document.file'|trans }}</th>
-                            <th class="w-1"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for document_form in documents %}
+        <div class="card-body">
+            {{ form_errors(documents) }}
+            {% if documents|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table table-vcenter card-table">
+                        <thead>
                             <tr>
-                                <td class="align-top">
-                                    {{ form_widget(document_form.documentType) }}
-                                    {{ form_errors(document_form.documentType) }}
-                                </td>
-                                <td class="align-top">
-                                    {{ form_widget(document_form.documentVisibility) }}
-                                    {{ form_errors(document_form.documentVisibility) }}
-                                </td>
-                                <td class="align-top">
-                                    {{ form_widget(document_form.file) }}
-                                    {{ form_errors(document_form.file) }}
-                                    {% if document_form.vars.value and document_form.vars.value.path is not null %}
-                                        <a href="{{ path('bitexpert_product_document_admin_product_document_download', {id: document_form.vars.value.id}) }}"
-                                            target="_blank"
-                                            class="btn btn-md btn-outline-primary mt-4"
-                                        >
-                                            {{ ux_icon('tabler:download', {class: 'icon'}) }}
-                                            {{ 'bitexpert_product_document.ui.download_file'|trans }}
-                                        </a>
-                                    {% endif %}
-                                </td>
-                                <td class="align-top text-end">
-                                    {{ form_widget(document_form.vars.button_delete, {
-                                        label: ux_icon('tabler:trash', {class: 'icon'}),
-                                        label_html: true,
-                                        attr: {class: 'btn btn-outline-danger btn-icon'},
-                                    }) }}
-                                </td>
+                                <th>{{ 'bitexpert_product_document.form.product_document.document_type'|trans }}</th>
+                                <th>{{ 'bitexpert_product_document.form.product_document.document_visibility'|trans }}</th>
+                                <th>{{ 'bitexpert_product_document.form.product_document.file'|trans }}</th>
+                                <th class="w-1"></th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for document_form in documents %}
+                                <tr>
+                                    <td class="align-top">
+                                        {{ form_widget(document_form.documentType) }}
+                                        {{ form_errors(document_form.documentType) }}
+                                    </td>
+                                    <td class="align-top">
+                                        {{ form_widget(document_form.documentVisibility) }}
+                                        {{ form_errors(document_form.documentVisibility) }}
+                                    </td>
+                                    <td class="align-top">
+                                        {{ form_widget(document_form.file) }}
+                                        {{ form_errors(document_form.file) }}
+                                        {% if document_form.vars.value and document_form.vars.value.path is not null %}
+                                            <a href="{{ path('bitexpert_product_document_admin_product_document_download', {id: document_form.vars.value.id}) }}"
+                                                target="_blank"
+                                                class="btn btn-md btn-outline-primary mt-4"
+                                            >
+                                                {{ ux_icon('tabler:download', {class: 'icon'}) }}
+                                                {{ 'bitexpert_product_document.ui.download_file'|trans }}
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td class="align-top text-end">
+                                        {{ form_widget(document_form.vars.button_delete, {
+                                            label: ux_icon('tabler:trash', {class: 'icon'}),
+                                            label_html: true,
+                                            attr: {class: 'btn btn-outline-danger btn-icon'},
+                                        }) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="card-body text-center text-muted py-4">
+                    {{ ux_icon('tabler:file-off', {class: 'icon icon-lg mb-2 d-block mx-auto'}) }}
+                    <p class="mb-0">{{ 'bitexpert_product_document.ui.no_documents'|trans }}</p>
+                </div>
+            {% endif %}
+
+            <div class="d-grid gap-2">
+                {{ form_widget(documents.vars.button_add) }}
             </div>
-        {% else %}
-            <div class="card-body text-center text-muted py-4">
-                {{ ux_icon('tabler:file-off', {class: 'icon icon-lg mb-2 d-block mx-auto'}) }}
-                <p class="mb-0">{{ 'bitexpert_product_document.ui.no_documents'|trans }}</p>
-            </div>
-        {% endif %}
+        </div>
     </div>
 </div>
