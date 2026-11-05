@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "behat/behat": "^3.16",
-        "bitexpert/phpstan-sylius": "^0.3.0",
+        "bitexpert/phpstan-sylius": "^0.4.0",
         "dbrekelmans/bdi": "^1.4",
         "dmore/behat-chrome-extension": "^1.4",
         "dmore/chrome-mink-driver": "^2.9",
