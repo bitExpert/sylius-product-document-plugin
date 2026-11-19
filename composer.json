@@ -51,7 +51,7 @@
         "symfony/http-client": "^6.4 || ^7.4",
         "symfony/intl": "^6.4 || ^7.4",
         "symfony/maker-bundle": "^1.67",
-        "symfony/runtime": "^6.4 || ^7.4",
+        "symfony/runtime": "^8.1.11",
         "symfony/var-exporter": "^7.4",
         "symfony/web-profiler-bundle": "^6.4 || ^7.4",
         "symfony/webpack-encore-bundle": "^2.2",
